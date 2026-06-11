@@ -10,7 +10,7 @@ Inspired by [TensorFlow Playground](https://playground.tensorflow.org/), but rei
 
 ## Screenshot
 
-![Neural Playground — spiral dataset loaded, ready to train](screenshots/neural-playground.png)
+![Neural Playground — spiral dataset loaded, ready to train](/neural-playground.png)
 
 *The spiral dataset at step 0 — two interleaved arms the network has to untangle. Hit **Train** and the boundary heatmap forms live.*
 
