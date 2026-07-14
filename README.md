@@ -1,5 +1,9 @@
 # Neural Playground
 
+### ▶ [**Live Demo — train a network in your browser**](https://vanshtaneja23.github.io/neuralplayground/)
+
+A neural network you can watch learn — MLP with forward pass, backprop, and minibatch SGD written from scratch in pure JavaScript, zero ML libraries, training live in your browser.
+
 > Train a neural network live in the browser — forward pass, backpropagation, and minibatch SGD written entirely from scratch in JavaScript. **Zero ML libraries.**
 
 An interactive visualization of how a multilayer perceptron (MLP) learns to classify non-linearly-separable data. Pick a dataset, design the network architecture, hit **Train**, and watch the decision boundary form in real time as gradients flow.
@@ -10,9 +14,9 @@ Inspired by [TensorFlow Playground](https://playground.tensorflow.org/), but rei
 
 ## Screenshot
 
-![Neural Playground — spiral dataset loaded, ready to train](/neural-playground.png)
+![Neural Playground — spiral dataset solved, 99.1% accuracy](neural-playground.png)
 
-*The spiral dataset at step 0 — two interleaved arms the network has to untangle. Hit **Train** and the boundary heatmap forms live.*
+*The spiral after ~28,800 steps (3 hidden layers, tanh, lr 0.1) — two interleaved arms fully untangled at 99.1% accuracy. The boundary heatmap forms live while it trains.*
 
 ---
 
@@ -100,41 +104,22 @@ Each dataset is generated procedurally with uniform noise, ~220 points total, in
 
 ## Getting started
 
-The whole app is a single self-contained React component (`neural-playground.jsx`) with no dependencies beyond React itself.
+The network itself is a single self-contained React component (`neural-playground.jsx`) with no dependencies beyond React — all styling is inline, so there's no CSS or Tailwind step. Vite is used only to serve and bundle it.
 
 ```bash
-# clone the repo
 git clone https://github.com/vanshtaneja23/neuralplayground.git
-
-# scaffold a Vite + React app
-npm create vite@latest neuralplayground-app -- --template react
-cd neuralplayground-app
+cd neuralplayground
 npm install
-
-# drop the component in
-cp ../neuralplayground/neural-playground.jsx src/NeuralPlayground.jsx
-```
-
-Then render it from `src/App.jsx`:
-
-```jsx
-import NeuralPlayground from "./NeuralPlayground";
-export default function App() {
-  return <NeuralPlayground />;
-}
-```
-
-```bash
 npm run dev
 ```
 
-No build flags, no environment variables, no backend. It also runs as-is in any environment that can render a single React component.
+No environment variables, no backend, no API keys. `npm run build` emits a fully static `dist/` — that's what GitHub Pages serves.
 
 ---
 
 ## Things to try
 
-1. **Spiral + 2 hidden layers of 6, tanh, lr 0.3** — the default. Watch the boundary go from a blurry diagonal to two crisp interlocking arms over ~2,000 steps.
+1. **Spiral + 3 hidden layers of ~9, tanh, lr 0.1** — reaches ~99% and cleanly separates both arms in under 30k steps (about 40 seconds of training). The default 2×6 at lr 0.3 is deliberately under-provisioned: it stalls around 85% and visibly oscillates, which is the point — it shows you what too-small-and-too-fast looks like before you fix it.
 2. **Drop to 1 hidden layer of 2 neurons** on the spiral — watch the network underfit no matter how long it trains. Capacity matters.
 3. **ReLU + lr 1.0** — observe loss spikes and dead-zone artifacts in the boundary. Then drop to 0.1 and watch it recover.
 4. **XOR with 1 layer of 3** — the minimal-ish architecture that solves it, and a nice demonstration of the universal approximation idea at small scale.
@@ -146,9 +131,11 @@ No build flags, no environment variables, no backend. It also runs as-is in any 
 ```
 neuralplayground/
 ├── README.md
-├── screenshots/
-│   └── neural-playground.png
-└── neural-playground.jsx
+├── index.html                   Vite entry
+├── vite.config.js               base: /neuralplayground/ for Pages
+├── src/main.jsx                 mounts the component
+├── .github/workflows/deploy.yml build + deploy to GitHub Pages
+└── neural-playground.jsx        the entire app
     ├── Dataset generators        (spiral / circles / xor / gaussians)
     ├── Network core
     │   ├── makeNet()             weight & bias initialization
