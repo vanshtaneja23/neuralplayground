@@ -163,7 +163,7 @@ neuralplayground/
 
 ## Credits
 
-Built by **Vansh Taneja** — forward pass, backpropagation, and minibatch SGD implemented by hand in JavaScript. Developed with assistance from Claude (Anthropic). Concept inspired by TensorFlow Playground.
+Built by **Vansh Taneja** — forward pass, backpropagation, and minibatch SGD implemented by hand in JavaScript. Concept inspired by TensorFlow Playground.
 
 ## License
 

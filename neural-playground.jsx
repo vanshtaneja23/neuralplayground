@@ -535,7 +535,7 @@ export default function NeuralPlayground() {
         </div>
 
         <footer style={{ ...mono, fontSize: 11, color: "#5A6660", marginTop: 22 }}>
-          Built by Vansh Taneja · forward pass, backpropagation &amp; minibatch SGD implemented by hand in JavaScript · assisted by Claude (Anthropic)
+          Built by Vansh Taneja · forward pass, backpropagation &amp; minibatch SGD implemented by hand in JavaScript
         </footer>
       </div>
     </div>
